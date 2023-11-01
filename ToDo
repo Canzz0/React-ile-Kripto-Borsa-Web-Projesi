@@ -1,0 +1,5 @@
+Bir Borsa Uygulaması Yapacağız.
+|-Burada hem fiyatlar artışlar vs olacak
+|-Hemde haberler ekonomi haberleri olacak
+|-Haberleri Api'lerden çekeceğiz
+|-Nodejs ile çekip React ile göstereceğiz
