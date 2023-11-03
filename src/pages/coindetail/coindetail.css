@@ -1,0 +1,62 @@
+
+.money-chart {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    height: 450px;
+    width: 100%;
+}
+
+.money-info {
+    margin-top: 6%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.money-figure {
+    filter: drop-shadow(4px 40px 12px #383838);
+    margin-top: 15%;
+    padding: 0;
+    animation: moveAnimation 3s linear infinite;
+}
+
+.money-figure img {
+    object-fit: cover;
+    width: 250px;
+    height: 250px;
+}
+
+@keyframes moveAnimation {
+    0% {
+        transform: translateY(-45%);
+    }
+
+    50% {
+        transform: translateY(-60%);
+    }
+
+    100% {
+        transform: translateY(-45%);
+    }
+}
+
+@keyframes figure-animation {
+    from {}
+
+}
+
+@media (max-width: 768px) {
+    /* MONEY DETAY SAYFASI */
+    .money-figure {
+        margin-top: 45%;
+    }
+
+    .money-info {
+        grid-template-columns: 1fr;
+    }
+
+    .chart {
+        width: 100%;
+        height: 100%;
+    }
+}
