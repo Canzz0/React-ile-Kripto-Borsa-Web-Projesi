@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import FooterComponent from '../../main_components/footer/footer';
@@ -9,38 +9,35 @@ import MoneyChartComponent from './components/moneychart';
 import './moneydetail.css';
 
 const CoinDetail = () => {
-    const time = '24h';
+    const [timeStatus, setTimeStatus] = useState('24h');
+    const time = timeStatus;
     const { uuid } = useParams();
     const dispatch = useDispatch();
-    const { coindetail } = useSelector(state => state.coindetail);
-    console.log(time);
+    const {isSuccess, coindetail } = useSelector(state => state.coindetail);
+    const getTime = (timeS) => {
+        setTimeStatus(timeS)
+    }
     useEffect(() => {
         dispatch(getCoinDetail({ time: time, uuid: uuid }));
-    }, [getCoinDetail]);
-    if (coindetail.length <= 0) {
+    }, [time]);
+    if (!isSuccess) {
         return (
             <>
                 <LoaderComponent />
             </>
         )
-
     }
-
     else {
         return (
             <>
                 {coindetail.data.coins.map((coindetail, index) => (
                     <title>{coindetail.name}</title>
-
                 ))}
                 <MoneyInfoComponent coindetails={coindetail} />
-                <MoneyChartComponent coindetails={coindetail} />
-                <FooterComponent/>
+                <MoneyChartComponent coindetails={coindetail} getTime={getTime} />
+                <FooterComponent />
             </>
         )
-
     }
-
 }
-
 export default CoinDetail

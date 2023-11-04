@@ -1,48 +1,60 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import LoaderComponent from '../../main_components/loader/loader';
+import { getNewsData } from '../../redux/features/news';
 import './newspage.css';
+
 const NewsPage = () => {
-  return (
-    <>
-    <title>Haberler</title>
-       <section class="news-places">
-    <div class="news-title text-center m-5">
-        <h1>Haberler Alanımız</h1>
+    const dispatch = useDispatch();
+    const { isSuccess, news } = useSelector(state => state.news);
 
-    </div>
-    <div class="container">
+    useEffect(() => {
+        dispatch(getNewsData());
+    }, [getNewsData]);
+    if (!isSuccess) {
+        return (
+            <>
+                <LoaderComponent />
+            </>
+        );
+    }
+    else {
+        console.log(news);
 
-        <div class="news-card row mt-2 mb-4">
-            <div class="news-image col-4">
-                <img src="./haber_örnek.jpeg" alt="" />
-            </div>
-            <div class="news-info col-8">
-                <div class="row">
-                    <h3><strong>Başlık 1</strong></h3>
-                </div>
-                <div class="row">
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam voluptate laudantium distinctio ratione tempora culpa suscipit consequuntur sunt eveniet deleniti!</p>
-                </div>
-            </div>
-        </div>
-        <div class="news-card row mt-2 mb-4">
-            <div class="news-image col-4">
-                <img src="./haber_örnek.jpeg" alt=""/>
-            </div>
-            <div class="news-info col-8">
-                <div class="row">
-                    <h3><strong>Başlık 2</strong></h3>
-                </div>
-                <div class="row">
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam voluptate laudantium distinctio ratione tempora culpa suscipit consequuntur sunt eveniet deleniti!</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-</section>
-    </>
- 
-  )
-}
+        return (
+            <>
+                <title>Haberler</title>
+                <section className="news-places">
+                    <div className="news-title text-center m-5">
+                        <h1>Haberler Alanımız</h1>
+                    </div>
+                    <div className="container">
+                        {news.map((article, index) => (
+                            <Link to={article.url} target="_blank" rel="noopener noreferrer" key={index}>
+                                <div key={index} className="news-card row mt-2 mb-4">
+                                    <div className="news-image col-4">
+                                        <img src={article.urlToImage} alt="" />
+                                    </div>
+                                    <div className="news-info col-8">
+                                        <div className="row">
+                                            <h3><strong>{article.title}</strong></h3>
+                                        </div>
+                                        <div className="row">
+                                            <p>{article.content}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </Link>
+
+                        ))}
+                    </div>
+                </section>
+            </>
+        );
+    }
+
+
+};
 
 export default NewsPage;

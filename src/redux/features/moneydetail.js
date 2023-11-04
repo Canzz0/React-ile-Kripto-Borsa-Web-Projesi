@@ -1,7 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+
 const initialState = {
     coindetail: [],
+    isSuccess:false,
 }
 
 export const getCoinDetail = createAsyncThunk("GET", async ({ time, uuid }) => {
@@ -16,17 +18,17 @@ export const getCoinDetail = createAsyncThunk("GET", async ({ time, uuid }) => {
             orderDirection: 'desc',
             limit: '50',
             offset: '0'
-          },
-          headers: {
+        },
+        headers: {
             'X-RapidAPI-Key': '6bcdc0678cmsh92358b4c31722b6p1a4e23jsn0faa60a71079',
             'X-RapidAPI-Host': 'coinranking1.p.rapidapi.com'
-          }
+        }
     };
     try {
         const response = await axios.request(options);
-            return response.data;
+        return response.data;
     } catch (error) {
-        return(error);
+        return (error);
     }
 })
 
@@ -41,6 +43,7 @@ export const coinDetailSlice = createSlice({
         builder
             .addCase(getCoinDetail.fulfilled, (state, action) => {
                 state.coindetail = action.payload;
+                state.isSuccess=true;
             })
     }
 })

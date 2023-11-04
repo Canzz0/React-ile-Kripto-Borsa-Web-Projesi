@@ -2,17 +2,18 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import FooterComponent from '../../main_components/footer/footer'
 import LoaderComponent from '../../main_components/loader/loader'
-import { getMarketDataHours } from '../../redux/features/market'
+import { getMarketData } from '../../redux/features/market'
 import MarketComponent from './components/marketdata'
 import "./marketpage.css"
 const MarketPage = () => {
     const dispatch = useDispatch();
-    const { market } = useSelector(state => state.market)
-    useEffect(() => {
-        dispatch(getMarketDataHours());
+    const {isSuccess, market } = useSelector(state => state.market)
 
-    }, [getMarketDataHours])
-    if (market.length <= 0) {
+    useEffect(() => {
+        dispatch(getMarketData());
+    }, [getMarketData])
+    
+    if (!isSuccess) {
         return (
             <>
                 <LoaderComponent />
@@ -21,12 +22,14 @@ const MarketPage = () => {
     }
     else {
 
-        return (<>
+        return (
+        <>
             <title>Borsa</title>
             <MarketComponent market={market} />
-            <FooterComponent/>
+            <FooterComponent />
         </>
         )
+        
     }
 
 }
