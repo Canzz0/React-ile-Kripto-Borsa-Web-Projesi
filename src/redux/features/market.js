@@ -3,8 +3,7 @@ import axios from "axios";
 
 const initialState = {
     market: [],
-    loading:false,
-    error:false,
+
 }
 
 export const getMarketDataHours = createAsyncThunk("GET",async () => {
@@ -29,7 +28,7 @@ export const getMarketDataHours = createAsyncThunk("GET",async () => {
         const response = await axios.request(options);
             return response.data
     } catch (error) {
-        console.error(error);
+        return(error);
     }
 
 })
