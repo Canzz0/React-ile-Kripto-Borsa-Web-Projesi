@@ -9,7 +9,7 @@ const initialState = {
 
 export const getNewsData = createAsyncThunk("news/GET", async () => {
     const options = {
-        url: 'https://newsapi.org/v2/everything?q=crypto&apiKey=0751bb19c3cd4f08ac281780737da1af'
+        url: 'https://newsapi.org/v2/everything?q=crypto&apiKey=API_KEY'
     };
     try {
         const response = await axios.request(options);
