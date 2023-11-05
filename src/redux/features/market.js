@@ -8,32 +8,37 @@ const initialState = {
 
 }
 
-export const getMarketData = createAsyncThunk("market/GET",async () => {
+export const getMarketData = createAsyncThunk("market/GET", async ({ search }) => {
     const options = {
-        url: 'https://coinranking1.p.rapidapi.com/coins',
-        params: {
-            referenceCurrencyUuid: 'yhjMzLPhuIDl',
-            timePeriod: '24h',
-            'tiers[0]': '1',
-            orderBy: 'marketCap',
-            orderDirection: 'desc',
-            limit: '60',
-            offset: '0'
-        },
-        headers: {
-            'X-RapidAPI-Key': '6bcdc0678cmsh92358b4c31722b6p1a4e23jsn0faa60a71079',
-            'X-RapidAPI-Host': 'coinranking1.p.rapidapi.com'
-        }
+      url: 'https://coinranking1.p.rapidapi.com/coins',
+      params: {
+        referenceCurrencyUuid: 'yhjMzLPhuIDl',
+        timePeriod: '24h',
+        'tiers[0]': '1',
+        orderBy: 'marketCap',
+        orderDirection: 'desc',
+        limit: '60',
+        offset: '0',
+      },
+      headers: {
+        'X-RapidAPI-Key': '6bcdc0678cmsh92358b4c31722b6p1a4e23jsn0faa60a71079',
+        'X-RapidAPI-Host': 'coinranking1.p.rapidapi.com'
+      }
     };
-
-    try {
-        const response = await axios.request(options);
-            return response.data
-    } catch (error) {
-        return(error);
+  
+    if (search) {
+      // Eğer "search" değeri varsa, isteğin "params" alanına ekleyin
+      options.params.search = search;
     }
-
-})
+  
+    try {
+      const response = await axios.request(options);
+      return response.data;
+    } catch (error) {
+      return error;
+    }
+  });
+  
 
 export const marketSlice = createSlice({
     name:'market',

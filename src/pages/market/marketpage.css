@@ -6,7 +6,6 @@
     display: grid;
     grid-template-columns: 4fr 4fr 4fr;
 }
-
 .market-cards a {
 
     color: black;
@@ -47,6 +46,44 @@
     margin: 0.5%;
     height: 150px;
 }
+
+.search-place {
+    padding: 1%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.search-place input {
+    padding-left: 1%;
+    width: 25%;
+    margin-right: 0.5%;
+    border: 2px solid #ccc;
+    border-radius: 25px;
+}
+
+.search-place input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.not-found-message {
+    text-align: center;
+    font-size: 56px;
+    font-weight: bold;
+    color: #555;
+    background-color: #f2f2f2;
+    border: 2px solid #555;
+    border-radius: 5px;
+    padding: 20px;
+    margin-top: 200px;
+}
+
+.not-found-message:hover {
+    background-color: #555;
+    color: #fff;
+    border-color: #555;
+}
+
 @media (max-width: 768px) {
 
     /* BORSA SAYFASI */
@@ -69,7 +106,10 @@
     .money-card-info {
         align-items: center;
     }
-
+    .search-place input {
+        height: auto;
+        width: 100%;
+    }
     /* --------------------- */
 
 }

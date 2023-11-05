@@ -29,12 +29,23 @@ a{
     border: solid 2px black;
     border-radius: 10% 10% 10% 0;
 }
-.pagebtn{
-    width: auto;
+.pagination {
+    justify-content: center;
+    display: flex;
+}
+.pagination a{
+    transition: all 0.5s;
+    border-radius: 25px;
+
+    padding: 10px;
     margin: 0.5%;
 }
-.page-btn-place{
-    justify-content: center;
+.pagination a:hover{
+    border-radius: 25px;
+    background-color: rgb(80, 80, 250);
+}
+.page-active{
+    background-color: rgb(182, 182, 251);
 }
 @media (max-width: 768px) {
     /* HABERLER */
@@ -63,6 +74,7 @@ a{
         text-align: center;
     }
 }
+
 @media (max-width: 768px) {
     .nav-img {
         width: 100%;

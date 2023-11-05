@@ -14,7 +14,7 @@ const LayoutComponent = () => {
                         <div class="navbar-collapse" id="navbarNav">
                             <ul class="navbar-nav mx-auto">
                                 <li class="nav-item">
-                                    <Link to='/news'
+                                    <Link to='/news/1'
                                         className={`nav-link ${location.pathname === '/' || location.pathname === '/news' ? 'actived' : ''}`}
                                     >
                                         <i class="bi bi-newspaper">

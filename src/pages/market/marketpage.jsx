@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import FooterComponent from '../../main_components/footer/footer'
 import LoaderComponent from '../../main_components/loader/loader'
@@ -6,12 +6,15 @@ import { getMarketData } from '../../redux/features/market'
 import MarketComponent from './components/marketdata'
 import "./marketpage.css"
 const MarketPage = () => {
+    const [searchvalues,setSearchValues]=useState();
     const dispatch = useDispatch();
     const {isSuccess, market } = useSelector(state => state.market)
-
+    const search =(value) =>{
+        setSearchValues(value)
+    }
     useEffect(() => {
-        dispatch(getMarketData());
-    }, [getMarketData])
+        dispatch(getMarketData({search:searchvalues}));
+    }, [searchvalues])
     
     if (!isSuccess) {
         return (
@@ -25,7 +28,7 @@ const MarketPage = () => {
         return (
         <>
             <title>Borsa</title>
-            <MarketComponent market={market} />
+            <MarketComponent market={market} search={search} />
             <FooterComponent />
         </>
         )
