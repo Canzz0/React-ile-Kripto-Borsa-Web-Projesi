@@ -20,7 +20,7 @@ export const getCoinDetail = createAsyncThunk("GET", async ({ time, uuid }) => {
             offset: '0'
         },
         headers: {
-            'X-RapidAPI-Key': '6bcdc0678cmsh92358b4c31722b6p1a4e23jsn0faa60a71079',
+            'X-RapidAPI-Key': 'API_KEY',
             'X-RapidAPI-Host': 'coinranking1.p.rapidapi.com'
         }
     };
